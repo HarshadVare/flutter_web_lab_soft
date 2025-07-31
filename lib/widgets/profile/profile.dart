@@ -16,7 +16,7 @@ class Profile extends StatelessWidget {
           bottomLeft: Radius.circular(Responsive.isMobile(context) ? 10 : 30.0),
           topLeft: Radius.circular(Responsive.isMobile(context) ? 10 : 30.0),
         ),
-        color: cardBackgroundColor,
+        color: Colors.white
       ),
       child: SingleChildScrollView(
         child: Padding(
@@ -27,25 +27,25 @@ class Profile extends StatelessWidget {
               Image.asset("assets/images/avatar.png"),
               const SizedBox(height: 15),
               const Text(
-                "Summer",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                "PrimeCare Pathology Lab",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,color: Colors.black),
               ),
               const SizedBox(height: 2),
-              Text(
-                "Edit health details",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(
-                  Responsive.isMobile(context) ? 15 : 20.0,
-                ),
-                child: const WeightHeightBloodCard(),
-              ),
-              SizedBox(height: Responsive.isMobile(context) ? 20 : 40),
-              Scheduled(),
+              // Text(
+              //   "Edit health details",
+              //   style: TextStyle(
+              //     fontSize: 12,
+              //     color: Theme.of(context).primaryColor,
+              //   ),
+              // ),
+              // Padding(
+              //   padding: EdgeInsets.all(
+              //     Responsive.isMobile(context) ? 15 : 20.0,
+              //   ),
+              //   child: const WeightHeightBloodCard(),
+              // ),
+              // SizedBox(height: Responsive.isMobile(context) ? 20 : 40),
+              // Scheduled(),
             ],
           ),
         ),

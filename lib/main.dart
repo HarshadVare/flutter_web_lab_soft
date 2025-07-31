@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Responsive Dashboard',
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       theme: ThemeData(
         primaryColor: MaterialColor(primaryColorCode, <int, Color>{
           50: const Color(primaryColorCode).withOpacity(0.1),
@@ -27,10 +27,11 @@ class MyApp extends StatelessWidget {
           700: const Color(primaryColorCode).withOpacity(0.8),
           800: const Color(primaryColorCode).withOpacity(0.9),
           900: const Color(primaryColorCode).withOpacity(1.0),
-        }),
-        scaffoldBackgroundColor: Color(0xFF171821),
+        },
+        ),
+        scaffoldBackgroundColor:const Color(0xffF5F7FA),
         fontFamily: 'IBMPlexSans',
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
       ),
       home: DashBoard(),
     );
