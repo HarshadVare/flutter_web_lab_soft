@@ -40,7 +40,7 @@ class DashBoard extends StatelessWidget {
             //   const Expanded(flex: 4, child: Profile()),
             CustomeHeader(scaffoldKey: _scaffoldKey),
 
-            if (Responsive.isDesktop(context))
+            if (Responsive.isDesktop(context) || Responsive.isTablet(context))
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
@@ -69,10 +69,10 @@ class BillingActions extends StatelessWidget {
       flex: 1,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 8),
-        height: 550,
+        height: 600,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
           children: [
@@ -101,13 +101,23 @@ class BillingActions extends StatelessWidget {
             CommonTextField(labelText: 'Balance'),
             SizedBox(height: 8),
             CommonDropDownField(
-              items: ['Cash,Card'],
+              items: ['Cash', 'Card'],
               labelText: 'Payment Type',
+              onChanged: (value) {
+                // Handle your logic here
+                print("Selected: $value");
+                // setState(() => yourSelectedValue = value);
+              },
             ),
             SizedBox(height: 8),
             CommonDropDownField(
               items: ['Non Cashless'],
               labelText: 'Patient Type',
+              onChanged: (value) {
+                // Handle your logic here
+                print("Selected: $value");
+                // setState(() => yourSelectedValue = value);
+              },
             ),
             SizedBox(height: 8),
           ],
@@ -126,10 +136,10 @@ class TestEntry extends StatelessWidget {
       flex: 2,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 8),
-        height: 550,
+        height: 600,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,6 +157,7 @@ class TestEntry extends StatelessWidget {
             CommonDropDownField(
               items: ['Main Lab', 'Other Lab'],
               labelText: 'Location',
+              onChanged: (value) {},
             ),
             SizedBox(height: 8),
             CommonDropDownField(
@@ -156,9 +167,54 @@ class TestEntry extends StatelessWidget {
                 'Sample Collected At Hospital/Clinic',
               ],
               labelText: 'Smaple Info',
+              onChanged: (value) {},
             ),
             SizedBox(height: 8),
             EditableTestTable(),
+            Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                InkWell(
+                  onTap: () async {},
+                  child: Container(
+                    margin: EdgeInsets.only(left: 16, bottom: 10),
+                    height: 35,
+                    width: 90,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF2563EB),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Save',
+                        style: TextStyle(color: Colors.white, fontSize: 14),
+                      ),
+                    ),
+                  ),
+                ),
+                // SizedBox(width: 10),
+                InkWell(
+                  onTap: () async {},
+                  child: Container(
+                    margin: EdgeInsets.only(left: 16, bottom: 10),
+                    height: 35,
+                    width: 90,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.grey.shade300),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Print',
+                        style: TextStyle(color: Colors.black, fontSize: 14),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
@@ -182,10 +238,10 @@ class _PatientInfoState extends State<PatientInfo> {
       flex: 1,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 8),
-        height: 550,
+        height: 600,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,11 +259,17 @@ class _PatientInfoState extends State<PatientInfo> {
             CommonDropDownField(
               items: ['ID1', 'ID2', 'ID3'],
               labelText: 'Lab Id',
+              onChanged: (value) {
+                // Handle your logic here
+                print("Selected: $value");
+                // setState(() => yourSelectedValue = value);
+              },
             ),
             SizedBox(height: 8),
             CommonTextField(labelText: 'Patient Name'),
             SizedBox(height: 8),
-
+            CommonTextField(labelText: 'Contact Number'),
+            SizedBox(height: 8),
             Row(
               children: [
                 SizedBox(
@@ -215,6 +277,11 @@ class _PatientInfoState extends State<PatientInfo> {
                   child: CommonDropDownField(
                     items: ['Dr', 'Self'],
                     labelText: 'Ref By',
+                    onChanged: (value) {
+                      // Handle your logic here
+                      print("Selected: $value");
+                      // setState(() => yourSelectedValue = value);
+                    },
                   ),
                 ),
                 SizedBox(width: 8),
@@ -227,6 +294,11 @@ class _PatientInfoState extends State<PatientInfo> {
             CommonDropDownField(
               items: ['Male', 'Female', 'Transgender', 'Other'],
               labelText: 'Sex',
+              onChanged: (value) {
+                // Handle your logic here
+                print("Selected: $value");
+                // setState(() => yourSelectedValue = value);
+              },
             ),
             SizedBox(height: 8),
             CommonTextField(labelText: 'PRN'),
@@ -374,7 +446,6 @@ class EditableTestTableState extends State<EditableTestTable> {
   ];
 
   void _addEmptyRow() {
-
     setState(() {
       testEntries.add(TestEntry1(code: '', description: '', fee: 0));
     });
@@ -390,29 +461,6 @@ class EditableTestTableState extends State<EditableTestTable> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            ElevatedButton.icon(
-              onPressed: ()async{
-                 final code = await showDialog<String>(
-                  context: context,
-                  builder: (context) => _AddCodeDialog(onTap:()=> _addEmptyRow,),
-                );
-
-                 if (code != null && code.isNotEmpty) {
-                  setState(() {
-                    testEntries.add(
-                      TestEntry1(code: code, description: '', fee: 0,),
-                    );
-                  });
-                }
-              },
-              icon: Icon(Icons.add),
-              label: Text('Add Test'),
-            ),
-          ],
-        ),
         SizedBox(height: 8),
         Container(
           decoration: BoxDecoration(
@@ -450,7 +498,7 @@ class EditableTestTableState extends State<EditableTestTable> {
                   thumbVisibility: true,
                   controller: _scrollController,
                   child: ListView.builder(
-                    controller: _scrollController,  
+                    controller: _scrollController,
                     itemCount: testEntries.length,
                     itemBuilder: (ctx, i) {
                       final test = testEntries[i];
@@ -458,8 +506,11 @@ class EditableTestTableState extends State<EditableTestTable> {
                         children: [
                           SizedBox(width: 8),
                           _editableCell(
+                            isRead: true,
                             initialValue: test.code,
-                            onChanged: (val) => setState(() => testEntries[i] = test.copyWith(code: val)),
+                            onChanged: (val) => setState(
+                              () => testEntries[i] = test.copyWith(code: val),
+                            ),
                           ),
                           _editableCell(
                             initialValue: test.description,
@@ -484,46 +535,43 @@ class EditableTestTableState extends State<EditableTestTable> {
                   ),
                 ),
               ),
-              // ...testEntries.asMap().entries.map((entry) {
-              //   final idx = entry.key;
-              //   final test = entry.value;
-              //   return Row(
-              //     children: [
-              //       SizedBox(width: 8),
-              //       Expanded(
-              //         child: SizedBox(
-              //           height: 33,
-              //           child: CommonDropDownField(
-              //             items: ['CBC', 'LFT'],
-              //             labelText: 'Code',
-              //           ),
-              //         ),
-              //       ),
-              //       // _editableCell(
-              //       //   isRead: true,
-              //       //   initialValue: test.code,
-              //       //   onChanged: (val) =>
-              //       //       testEntries[idx] = test.copyWith(code: val),
-              //       // ),
-              //       _editableCell(
-              //         initialValue: test.description,
-              //         onChanged: (val) =>
-              //             testEntries[idx] = test.copyWith(description: val),
-              //         flex: 2,
-              //       ),
-              //       _editableCell(
-              //         initialValue: test.fee.toString(),
-              //         onChanged: (val) => testEntries[idx] = test.copyWith(
-              //           fee: double.tryParse(val) ?? 0,
-              //         ),
-              //       ),
-              //       IconButton(
-              //         icon: Icon(Icons.delete_outline, color: Colors.red),
-              //         onPressed: () => _removeRow(idx),
-              //       ),
-              //     ],
-              //   );
-              // }),
+              Divider(color: Colors.grey.shade300),
+              Row(
+                children: [
+                  InkWell(
+                    onTap: () async {
+                      final code = await showDialog<String>(
+                        context: context,
+                        builder: (context) => _AddCodeDialog(),
+                      );
+
+                      if (code != null && code.isNotEmpty) {
+                        setState(() {
+                          testEntries.add(
+                            TestEntry1(code: code, description: '', fee: 0),
+                          );
+                        });
+                      }
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 16, bottom: 10),
+                      height: 35,
+                      width: 90,
+                      decoration: BoxDecoration(
+                        color: Color(0xFF2563EB),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Center(
+                        child: Text(
+                          '+ Add Test',
+
+                          style: TextStyle(color: Colors.white, fontSize: 14),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
@@ -583,34 +631,43 @@ class TestEntry1 {
   }
 }
 
-
 class _AddCodeDialog extends StatefulWidget {
-  final VoidCallback onTap;
-  const _AddCodeDialog({required this.onTap});
+  const _AddCodeDialog();
   @override
   State<_AddCodeDialog> createState() => _AddCodeDialogState();
 }
 
 class _AddCodeDialogState extends State<_AddCodeDialog> {
-  final TextEditingController _controller = TextEditingController();
-
+  String? selectedValue;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text('Enter Test Code'),
-      content: CommonDropDownField(items: ['CBC','LFT'], labelText: 'Code'),
-      actions: [
-        TextButton(
-          child: Text('Cancel'),
-          onPressed: () => Navigator.pop(context),
-        ),
-        ElevatedButton(
-          child: Text('Add'),
-          onPressed: () {
-            Navigator.pop(context, _controller.text.trim());
+    return Form(
+      key: _formKey,
+      child: AlertDialog(
+        title: Text('Enter Test Code'),
+        content: CommonDropDownField(
+          items: ['CBC', 'LFT'],
+          labelText: 'Code',
+          onChanged: (value) {
+            setState(() => selectedValue = value);
           },
         ),
-      ],
+        actions: [
+          TextButton(
+            child: Text('Cancel'),
+            onPressed: () => Navigator.pop(context),
+          ),
+          ElevatedButton(
+            child: Text('Add'),
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                Navigator.pop(context, selectedValue);
+              }
+            },
+          ),
+        ],
+      ),
     );
   }
 }

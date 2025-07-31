@@ -60,194 +60,228 @@ class EntryForm extends StatefulWidget {
 }
 
 class _EntryFormState extends State<EntryForm> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   DateTime? _selectedDate;
   final TextEditingController _dateController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        if (Responsive.isDesktop(context) || Responsive.isTablet(context))
-          Column(
-            children: [
-              CommonDropDownField(
-                items: ['ID1', 'ID2', 'ID3'],
-                labelText: 'Lab Id',
-              ),
-              SizedBox(height: 8),
-              CommonTextField(labelText: 'Patient Name'),
-              SizedBox(height: 8),
-              CommonTextField(
-                controller: _dateController,
-                isReadOnly: true,
-                onTap: () async {
-                  FocusScope.of(
-                    context,
-                  ).requestFocus(FocusNode()); // Remove keyboard
-                  DateTime? picked = await showDatePicker(
-                    context: context,
-                    initialDate: _selectedDate ?? DateTime.now(),
-                    firstDate: DateTime(2000),
-                    lastDate: DateTime(2100),
-                  );
-                  if (picked != null) {
-                    setState(() {
-                      _selectedDate = picked;
-                      _dateController.text =
-                          "${picked.day}/${picked.month}/${picked.year}";
-                    });
-                  }
-                },
-                labelText: 'Reg. Date',
-                // validator: (value) =>
-                //     value == null || value.isEmpty ? 'Required' : null,
-              ),
-              SizedBox(height: 8),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 100,
-                    child: CommonDropDownField(
-                      items: ['Dr', 'Self'],
-                      labelText: 'Ref By',
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          if (Responsive.isDesktop(context) || Responsive.isTablet(context))
+            Column(
+              children: [
+                CommonDropDownField(
+                  items: ['ID1', 'ID2', 'ID3'],
+                  labelText: 'Lab Id',
+                  onChanged: (value) {
+                    // Handle your logic here
+                    print("Selected: $value");
+                    // setState(() => yourSelectedValue = value);
+                  },
+                ),
+                SizedBox(height: 8),
+                CommonTextField(labelText: 'Patient Name'),
+                SizedBox(height: 8),
+                CommonTextField(
+                  controller: _dateController,
+                  isReadOnly: true,
+                  onTap: () async {
+                    FocusScope.of(
+                      context,
+                    ).requestFocus(FocusNode()); // Remove keyboard
+                    DateTime? picked = await showDatePicker(
+                      context: context,
+                      initialDate: _selectedDate ?? DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100),
+                    );
+                    if (picked != null) {
+                      setState(() {
+                        _selectedDate = picked;
+                        _dateController.text =
+                            "${picked.day}/${picked.month}/${picked.year}";
+                      });
+                    }
+                  },
+                  labelText: 'Reg. Date',
+                  // validator: (value) =>
+                  //     value == null || value.isEmpty ? 'Required' : null,
+                ),
+                SizedBox(height: 8),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 100,
+                      child: CommonDropDownField(
+                        items: ['Dr', 'Self'],
+                        labelText: 'Ref By',
+                        onChanged: (value) {
+                          // Handle your logic here
+                          print("Selected: $value");
+                          // setState(() => yourSelectedValue = value);
+                        },
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 8),
-                  Expanded(child: CommonTextField(labelText: 'Refer Name')),
-                ],
-              ),
-              SizedBox(height: 8),
-              CommonTextField(labelText: 'Age'),
-              SizedBox(height: 8),
-              CommonDropDownField(
-                items: ['Male', 'Female', 'Transgender', 'Other'],
-                labelText: 'Sex',
-              ),
-              SizedBox(height: 8),
-              CommonDropDownField(
-                items: ['Main Lab', 'Other Lab'],
-                labelText: 'Location',
-              ),
-              SizedBox(height: 8),
-              CommonDropDownField(
-                items: [
-                  'Sample Collected At Lab',
-                  'Sample Collected At Home',
-                  'Sample Collected At Hospital/Clinic',
-                ],
-                labelText: 'Smaple Info',
-              ),
-            ],
-          ),
+                    SizedBox(width: 8),
+                    Expanded(child: CommonTextField(labelText: 'Refer Name')),
+                  ],
+                ),
+                SizedBox(height: 8),
+                CommonTextField(labelText: 'Age'),
+                SizedBox(height: 8),
+                CommonDropDownField(
+                  items: ['Male', 'Female', 'Transgender', 'Other'],
+                  labelText: 'Sex',
+                  onChanged: (value) {
+                    // Handle your logic here
+                    print("Selected: $value");
+                    // setState(() => yourSelectedValue = value);
+                  },
+                ),
+                SizedBox(height: 8),
+                CommonDropDownField(
+                  items: ['Main Lab', 'Other Lab'],
+                  labelText: 'Location',
+                  onChanged: (value) {
+                    // Handle your logic here
+                    print("Selected: $value");
+                    // setState(() => yourSelectedValue = value);
+                  },
+                ),
+                SizedBox(height: 8),
+                CommonDropDownField(
+                  items: [
+                    'Sample Collected At Lab',
+                    'Sample Collected At Home',
+                    'Sample Collected At Hospital/Clinic',
+                  ],
+                  labelText: 'Smaple Info',
+                  onChanged: (value) {
+                    // Handle your logic here
+                    print("Selected: $value");
+                    // setState(() => yourSelectedValue = value);
+                  },
+                ),
+              ],
+            ),
 
-        // Column(
-        //   children: [
-        //     Row(
-        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //       children: [
-        //         Expanded(
-        //           child: DropDownField(
-        //             items: ['ID1', 'ID2', 'ID3'],
-        //             labelText: 'Lab Id',
-        //           ),
-        //         ),
-        //         SizedBox(width: 8),
-        //         Expanded(child: TextField(labelText: 'Patient Name')),
-        //         SizedBox(width: 8),
+          // Column(
+          //   children: [
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         Expanded(
+          //           child: DropDownField(
+          //             items: ['ID1', 'ID2', 'ID3'],
+          //             labelText: 'Lab Id',
+          //           ),
+          //         ),
+          //         SizedBox(width: 8),
+          //         Expanded(child: TextField(labelText: 'Patient Name')),
+          //         SizedBox(width: 8),
 
-        //         Expanded(
-        //           child: TextField(
-        //             controller: _dateController,
-        //             isReadOnly: true,
-        //             onTap: () async {
-        //               FocusScope.of(
-        //                 context,
-        //               ).requestFocus(FocusNode()); // Remove keyboard
-        //               DateTime? picked = await showDatePicker(
-        //                 context: context,
-        //                 initialDate: _selectedDate ?? DateTime.now(),
-        //                 firstDate: DateTime(2000),
-        //                 lastDate: DateTime(2100),
-        //               );
-        //               if (picked != null) {
-        //                 setState(() {
-        //                   _selectedDate = picked;
-        //                   _dateController.text =
-        //                       "${picked.day}/${picked.month}/${picked.year}";
-        //                 });
-        //               }
-        //             },
-        //             labelText: 'Reg. Date',
-        //             // validator: (value) =>
-        //             //     value == null || value.isEmpty ? 'Required' : null,
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //     SizedBox(height: Responsive.isMobile(context) ? 5 : 8),
-        //     Row(
-        //       children: [
-        //         SizedBox(
-        //           width: 100,
-        //           child: DropDownField(
-        //             items: ['Dr', 'Self'],
-        //             labelText: 'Ref By',
-        //           ),
-        //         ),
-        //         SizedBox(width: 8),
-        //         Expanded(child: TextField(labelText: 'Refer Name')),
-        //       ],
-        //     ),
-        //     SizedBox(height: Responsive.isMobile(context) ? 5 : 8),
-        //     Row(
-        //       children: [
-        //         Expanded(child: TextField(labelText: 'Age')),
-        //         SizedBox(width: 8),
-        //         Expanded(
-        //           child: DropDownField(
-        //             items: ['Male', 'Female', 'Transgender', 'Other'],
-        //             labelText: 'Sex',
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //     SizedBox(height: Responsive.isMobile(context) ? 5 : 8),
-        //     Row(
-        //       children: [Expanded(child: TextField(labelText: 'Contact No'))],
-        //     ),
-        //     SizedBox(height: Responsive.isMobile(context) ? 5 : 8),
-        //     Row(
-        //       children: [
-        //         Expanded(
-        //           child: DropDownField(
-        //             items: ['Main Lab', 'Other Lab'],
-        //             labelText: 'Location',
-        //           ),
-        //         ),
-        //         SizedBox(width: 8),
-        //         Expanded(
-        //           child: DropDownField(
-        //             items: [
-        //               'Sample Collected At Lab',
-        //               'Sample Collected At Home',
-        //               'Sample Collected At Hospital/Clinic',
-        //             ],
-        //             labelText: 'Smaple Info',
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ],
-        // ),
-        if (Responsive.isMobile(context))
-          Column(
-            children: [
-              CommonDropDownField(
-                items: ['ID1', 'ID2', 'ID3'],
-                labelText: 'Lab Id',
-              ),
-            ],
-          ),
-      ],
+          //         Expanded(
+          //           child: TextField(
+          //             controller: _dateController,
+          //             isReadOnly: true,
+          //             onTap: () async {
+          //               FocusScope.of(
+          //                 context,
+          //               ).requestFocus(FocusNode()); // Remove keyboard
+          //               DateTime? picked = await showDatePicker(
+          //                 context: context,
+          //                 initialDate: _selectedDate ?? DateTime.now(),
+          //                 firstDate: DateTime(2000),
+          //                 lastDate: DateTime(2100),
+          //               );
+          //               if (picked != null) {
+          //                 setState(() {
+          //                   _selectedDate = picked;
+          //                   _dateController.text =
+          //                       "${picked.day}/${picked.month}/${picked.year}";
+          //                 });
+          //               }
+          //             },
+          //             labelText: 'Reg. Date',
+          //             // validator: (value) =>
+          //             //     value == null || value.isEmpty ? 'Required' : null,
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //     SizedBox(height: Responsive.isMobile(context) ? 5 : 8),
+          //     Row(
+          //       children: [
+          //         SizedBox(
+          //           width: 100,
+          //           child: DropDownField(
+          //             items: ['Dr', 'Self'],
+          //             labelText: 'Ref By',
+          //           ),
+          //         ),
+          //         SizedBox(width: 8),
+          //         Expanded(child: TextField(labelText: 'Refer Name')),
+          //       ],
+          //     ),
+          //     SizedBox(height: Responsive.isMobile(context) ? 5 : 8),
+          //     Row(
+          //       children: [
+          //         Expanded(child: TextField(labelText: 'Age')),
+          //         SizedBox(width: 8),
+          //         Expanded(
+          //           child: DropDownField(
+          //             items: ['Male', 'Female', 'Transgender', 'Other'],
+          //             labelText: 'Sex',
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //     SizedBox(height: Responsive.isMobile(context) ? 5 : 8),
+          //     Row(
+          //       children: [Expanded(child: TextField(labelText: 'Contact No'))],
+          //     ),
+          //     SizedBox(height: Responsive.isMobile(context) ? 5 : 8),
+          //     Row(
+          //       children: [
+          //         Expanded(
+          //           child: DropDownField(
+          //             items: ['Main Lab', 'Other Lab'],
+          //             labelText: 'Location',
+          //           ),
+          //         ),
+          //         SizedBox(width: 8),
+          //         Expanded(
+          //           child: DropDownField(
+          //             items: [
+          //               'Sample Collected At Lab',
+          //               'Sample Collected At Home',
+          //               'Sample Collected At Hospital/Clinic',
+          //             ],
+          //             labelText: 'Smaple Info',
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ],
+          // ),
+          if (Responsive.isMobile(context))
+            Column(
+              children: [
+                CommonDropDownField(
+                  items: ['ID1', 'ID2', 'ID3'],
+                  labelText: 'Lab Id',
+                  onChanged: (value) {
+                    // Handle your logic here
+                    print("Selected: $value");
+                    // setState(() => yourSelectedValue = value);
+                  },
+                ),
+              ],
+            ),
+        ],
+      ),
     );
   }
 }
@@ -256,11 +290,13 @@ class CommonDropDownField extends StatefulWidget {
   final String labelText;
   final List<String> items;
   final String? selectedValue;
+  final void Function(String?) onChanged;
   const CommonDropDownField({
     super.key,
     required this.items,
     required this.labelText,
     this.selectedValue,
+    required this.onChanged,
   });
 
   @override
@@ -283,12 +319,9 @@ class _DropDownFieldState extends State<CommonDropDownField> {
         }).toList(),
         value: selectedValue,
         onChanged: (value) {
-          setState(() {
-            selectedValue = value;
-          });
+          widget.onChanged(value);
         },
-        // validator: (value) =>
-        //     value == null ? 'Please select an option' : null,
+        validator: (value) => value == null ? 'Please select an option' : null,
       ),
     );
   }
