@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:primecare_lab_soft/const.dart';
-import 'package:primecare_lab_soft/responsive.dart';
-import 'package:primecare_lab_soft/widgets/profile/widgets/scheduled.dart';
-import 'package:primecare_lab_soft/widgets/profile/widgets/weightHeightBloodCard.dart';
+import 'package:primecare_lab_soft/core/utils/responsive.dart';
 
 class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
+  const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +13,7 @@ class Profile extends StatelessWidget {
           bottomLeft: Radius.circular(Responsive.isMobile(context) ? 10 : 30.0),
           topLeft: Radius.circular(Responsive.isMobile(context) ? 10 : 30.0),
         ),
-        color: Colors.white
+        color: Colors.white,
       ),
       child: SingleChildScrollView(
         child: Padding(
@@ -28,7 +25,11 @@ class Profile extends StatelessWidget {
               const SizedBox(height: 15),
               const Text(
                 "PrimeCare Pathology Lab",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600,color: Colors.black),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black,
+                ),
               ),
               const SizedBox(height: 2),
               // Text(

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:primecare_lab_soft/const.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:primecare_lab_soft/core/constants/colors.dart';
 import 'package:primecare_lab_soft/dashboard.dart';
 
+
 void main() {
-  runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

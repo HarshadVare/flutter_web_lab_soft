@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:primecare_lab_soft/model/menu_modal.dart';
-import 'package:primecare_lab_soft/responsive.dart';
+import 'package:primecare_lab_soft/data/models/menu_modal.dart';
+import 'package:primecare_lab_soft/core/utils/responsive.dart';
 
 class Menu extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -30,7 +30,7 @@ class _MenuState extends State<Menu> {
       height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
         border: Border(right: BorderSide(color: Colors.grey[800]!, width: 1)),
-        color: const Color(0xFF171821),
+        color: Colors.white
       ),
       child: Padding(
         padding: const EdgeInsets.all(15.0),
