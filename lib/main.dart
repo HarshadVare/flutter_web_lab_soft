@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:primecare_lab_soft/core/constants/colors.dart';
-import 'package:primecare_lab_soft/dashboard.dart';
-
+import 'package:primecare_lab_soft/common/constants/colors.dart';
+import 'package:primecare_lab_soft/features/dashboard/presentation/dashboard.dart';
 
 void main() {
   runApp(ProviderScope(child: const MyApp()));
@@ -29,9 +28,8 @@ class MyApp extends StatelessWidget {
           700: const Color(primaryColorCode).withOpacity(0.8),
           800: const Color(primaryColorCode).withOpacity(0.9),
           900: const Color(primaryColorCode).withOpacity(1.0),
-        },
-        ),
-        scaffoldBackgroundColor:const Color(0xffF5F7FA),
+        }),
+        scaffoldBackgroundColor: const Color(0xffF5F7FA),
         fontFamily: 'IBMPlexSans',
         brightness: Brightness.light,
       ),

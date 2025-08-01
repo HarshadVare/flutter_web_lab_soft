@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:primecare_lab_soft/data/models/test_entry_model.dart';
+import 'package:primecare_lab_soft/features/test_entry/data/models/test_entry_model.dart';
 
 class TestEntryNotifier extends StateNotifier<List<TestEntry>> {
   TestEntryNotifier() : super([]);

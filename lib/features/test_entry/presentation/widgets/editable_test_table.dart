@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:primecare_lab_soft/application/providers/test_provider.dart';
-import 'package:primecare_lab_soft/data/models/test_entry_model.dart';
-import 'package:primecare_lab_soft/presentation/dialogs/add_code_dialog.dart';
+import 'package:primecare_lab_soft/features/test_entry/presentation/providers/test_provider.dart';
+import 'package:primecare_lab_soft/features/test_entry/data/models/test_entry_model.dart';
+import 'package:primecare_lab_soft/features/test_entry/presentation/dialogs/add_code_dialog.dart';
 
 class EditableTestTable extends ConsumerWidget {
   const EditableTestTable({super.key});
@@ -76,15 +76,15 @@ class EditableTestTable extends ConsumerWidget {
                                 : test.fee.toString(),
                             onChanged: (val) => ref
                                 .read(testEntryProvider.notifier)
-                                .update(i, test.copyWith(
-                                  fee: double.tryParse(val) ?? 0,
-                                )),
+                                .update(
+                                  i,
+                                  test.copyWith(fee: double.tryParse(val) ?? 0),
+                                ),
                           ),
                           IconButton(
                             icon: Icon(Icons.delete_outline, color: Colors.red),
-                            onPressed: () => ref
-                                .read(testEntryProvider.notifier)
-                                .remove(i),
+                            onPressed: () =>
+                                ref.read(testEntryProvider.notifier).remove(i),
                           ),
                         ],
                       );
@@ -102,9 +102,11 @@ class EditableTestTable extends ConsumerWidget {
                         builder: (context) => AddCodeDialog(),
                       );
                       if (code != null && code.isNotEmpty) {
-                        ref.read(testEntryProvider.notifier).addEntry(
-                          TestEntry(code: code, description: '', fee: 0),
-                        );
+                        ref
+                            .read(testEntryProvider.notifier)
+                            .addEntry(
+                              TestEntry(code: code, description: '', fee: 0),
+                            );
                       }
                     },
                     child: Container(
@@ -118,8 +120,7 @@ class EditableTestTable extends ConsumerWidget {
                       child: Center(
                         child: Text(
                           '+ Add Test',
-                          style:
-                              TextStyle(color: Colors.white, fontSize: 14),
+                          style: TextStyle(color: Colors.white, fontSize: 14),
                         ),
                       ),
                     ),

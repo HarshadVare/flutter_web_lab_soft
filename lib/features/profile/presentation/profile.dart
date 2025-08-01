@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:primecare_lab_soft/core/utils/responsive.dart';
+import 'package:primecare_lab_soft/common/utils/responsive.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
