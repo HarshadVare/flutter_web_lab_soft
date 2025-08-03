@@ -25,7 +25,7 @@ class BillingActions extends ConsumerWidget {
           ),
         ),
         SizedBox(height: 12),
-        ..._fields(),
+        _fields(),
         SizedBox(height: 8),
         CommonDropDownField(
           items: ['Cash', 'Card'],
@@ -54,7 +54,7 @@ class BillingActions extends ConsumerWidget {
   }
 
   // Helper: All text fields, less repetition, easy to add/reorder
-  List<Widget> _fields() {
+  Widget _fields() {
     const labels = [
       'Inv Fees',
       'Visiting Charges',
@@ -64,13 +64,21 @@ class BillingActions extends ConsumerWidget {
       'Paid',
       'Balance',
     ];
-    return labels
-        .map(
-          (label) => Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: CommonTextField(labelText: label),
-          ),
-        )
-        .toList();
+
+    return ListView.separated(
+      shrinkWrap: true,
+      physics:
+          const NeverScrollableScrollPhysics(), // Avoid nested scroll issues
+      itemCount: labels.length,
+      separatorBuilder: (_, __) => const SizedBox(height: 8),
+      itemBuilder: (context, index) {
+        return CommonTextField(
+          key: ValueKey(
+            labels[index],
+          ), // Helps Flutter efficiently reuse widgets
+          labelText: labels[index],
+        );
+      },
+    );
   }
 }

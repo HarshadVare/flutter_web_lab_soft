@@ -15,7 +15,7 @@ class Menu extends StatefulWidget {
 class MenuState extends State<Menu> {
   List<MenuModel> menu = [
     MenuModel(icon: 'assets/svg/home.svg', title: "Dashboard"),
-    MenuModel(icon: 'assets/svg/profile.svg', title: "Profile"),
+    // MenuModel(icon: 'assets/svg/profile.svg', title: "Profile"),
     MenuModel(icon: 'assets/svg/setting.svg', title: "Settings"),
     MenuModel(icon: 'assets/svg/signout.svg', title: "Signout"),
   ];

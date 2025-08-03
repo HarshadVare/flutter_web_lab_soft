@@ -85,10 +85,7 @@ class CustomeHeader extends StatelessWidget {
                   onTap: () => _scaffoldKey.currentState!.openEndDrawer(),
                   child: CircleAvatar(
                     backgroundColor: Colors.transparent,
-                    child: SvgPicture.asset(
-                      "assets/svg/Profile.svg",
-                      width: 22,
-                    ),
+                    child: Icon(Icons.person_2_outlined),
                   ),
                 ),
               ],
@@ -105,10 +102,7 @@ class CustomeHeader extends StatelessWidget {
                   onTap: () => _scaffoldKey.currentState!.openEndDrawer(),
                   child: CircleAvatar(
                     backgroundColor: Colors.transparent,
-                    child: SvgPicture.asset(
-                      "assets/svg/Profile.svg",
-                      width: 22,
-                    ),
+                    child: Icon(Icons.person_2_outlined),
                   ),
                 ),
               ],

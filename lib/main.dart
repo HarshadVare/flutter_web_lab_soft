@@ -4,6 +4,7 @@ import 'package:primecare_lab_soft/common/constants/colors.dart';
 import 'package:primecare_lab_soft/features/dashboard/presentation/dashboard.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(ProviderScope(child: const MyApp()));
 }
 

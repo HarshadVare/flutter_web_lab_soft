@@ -30,17 +30,21 @@ class HomeScreen extends StatelessWidget {
     }
 
     // For web/tablet/desktop: side-by-side
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(flex: 1, child: PatientInfo()),
-          const SizedBox(width: 12),
-          Expanded(flex: 2, child: TestEntry()),
-          const SizedBox(width: 12),
-          Expanded(flex: 1, child: BillingActions()),
-        ],
+    return Expanded(
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: SingleChildScrollView(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(flex: 1, child: PatientInfo()),
+              const SizedBox(width: 12),
+              Expanded(flex: 2, child: TestEntry()),
+              const SizedBox(width: 12),
+              Expanded(flex: 1, child: BillingActions()),
+            ],
+          ),
+        ),
       ),
     );
   }
