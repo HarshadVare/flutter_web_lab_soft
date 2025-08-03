@@ -77,6 +77,7 @@ class BillingActions extends ConsumerWidget {
             labels[index],
           ), // Helps Flutter efficiently reuse widgets
           labelText: labels[index],
+          fieldType: FieldType.number,
         );
       },
     );

@@ -22,7 +22,7 @@ class _DropDownFieldState extends State<CommonDropDownField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 45,
+      height: 50,
       child: DropdownButtonFormField(
         decoration: InputDecoration(
           labelText: widget.labelText,

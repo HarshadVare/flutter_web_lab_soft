@@ -39,9 +39,12 @@ class _PatientInfoState extends ConsumerState<PatientInfo> {
           onChanged: (value) {},
         ),
         SizedBox(height: 8),
-        CommonTextField(labelText: 'Patient Name'),
+        CommonTextField(labelText: 'Patient Name', fieldType: FieldType.name),
         SizedBox(height: 8),
-        CommonTextField(labelText: 'Contact Number'),
+        CommonTextField(
+          labelText: 'Contact Number',
+          fieldType: FieldType.contact,
+        ),
         SizedBox(height: 8),
         Row(
           children: [
@@ -54,11 +57,16 @@ class _PatientInfoState extends ConsumerState<PatientInfo> {
               ),
             ),
             SizedBox(width: 8),
-            Expanded(child: CommonTextField(labelText: 'Refer Name')),
+            Expanded(
+              child: CommonTextField(
+                labelText: 'Refer Name',
+                fieldType: FieldType.name,
+              ),
+            ),
           ],
         ),
         SizedBox(height: 8),
-        CommonTextField(labelText: 'Age'),
+        CommonTextField(labelText: 'Age', fieldType: FieldType.number),
         SizedBox(height: 8),
         CommonDropDownField(
           items: ['Male', 'Female', 'Transgender', 'Other'],
@@ -66,11 +74,12 @@ class _PatientInfoState extends ConsumerState<PatientInfo> {
           onChanged: (value) {},
         ),
         SizedBox(height: 8),
-        CommonTextField(labelText: 'PRN'),
+        CommonTextField(labelText: 'PRN', fieldType: FieldType.number),
         SizedBox(height: 8),
         CommonTextField(
           controller: _dateController,
           isReadOnly: true,
+          fieldType: FieldType.email,
           onTap: () async {
             FocusScope.of(context).requestFocus(FocusNode()); // Remove keyboard
             DateTime? picked = await showDatePicker(
