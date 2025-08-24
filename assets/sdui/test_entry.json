@@ -1,0 +1,81 @@
+{
+  "type": "Container",
+  "padding": {"horizontal": 8},
+  "height": 600,
+  "decoration": {
+    "color": "#FFFFFF",
+    "borderRadius": 8
+  },
+  "child": {
+    "type": "SingleChildScrollView",
+    "child": {
+      "type": "Column",
+      "crossAxisAlignment": "start",
+      "children": [
+        {"type": "SizedBox", "height": 12},
+        {
+          "type": "Text",
+          "value": "Sample/Order & Test Entry",
+          "style": {
+            "fontSize": 14,
+            "color": "#000000",
+            "fontWeight": "bold"
+          }
+        },
+        {"type": "SizedBox", "height": 12},
+        {
+          "type": "DropDown",
+          "labelText": "Location",
+          "items": ["Main Lab", "Other Lab"]
+        },
+        {"type": "SizedBox", "height": 8},
+        {
+          "type": "DropDown",
+          "labelText": "Sample Info",
+          "items": [
+            "Sample Collected At Lab",
+            "Sample Collected At Home",
+            "Sample Collected At Hospital/Clinic"
+          ]
+        },
+        {"type": "SizedBox", "height": 8},
+        {
+          "type": "CustomWidget",
+          "name": "EditableTestTable"
+        },
+        {"type": "SizedBox", "height": 24},
+        {
+          "type": "Row",
+          "mainAxisAlignment": "end",
+          "children": [
+            {
+              "type": "Button",
+              "text": "Save",
+              "width": 90,
+              "height": 35,
+              "backgroundColor": "#2563EB",
+              "textColor": "#FFFFFF",
+              "fontSize": 14,
+              "margin": {"left": 16, "bottom": 10},
+              "borderRadius": 4,
+              "action": {"type": "save"}
+            },
+            {
+              "type": "Button",
+              "text": "Print",
+              "width": 90,
+              "height": 35,
+              "backgroundColor": "#FFFFFF",
+              "textColor": "#000000",
+              "fontSize": 14,
+              "margin": {"left": 16, "bottom": 10},
+              "borderRadius": 4,
+              "border": {"color": "#D1D5DB"},
+              "action": {"type": "printAction"}
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

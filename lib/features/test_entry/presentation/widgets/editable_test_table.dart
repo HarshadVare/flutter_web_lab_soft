@@ -51,6 +51,7 @@ class EditableTestTable extends ConsumerWidget {
                   child: ListView.builder(
                     controller: scrollController,
                     itemCount: testEntries.length,
+                    shrinkWrap: true,
                     itemBuilder: (ctx, i) {
                       final test = testEntries[i];
                       return Row(

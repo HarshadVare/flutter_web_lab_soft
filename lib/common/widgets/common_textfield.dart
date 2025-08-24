@@ -52,7 +52,7 @@ class CommonTextField extends StatelessWidget {
     }
 
     return SizedBox(
-      height: 50,
+      height: 40,
       child: TextFormField(
         controller: controller,
         readOnly: isReadOnly,
@@ -61,8 +61,11 @@ class CommonTextField extends StatelessWidget {
         inputFormatters: inputFormatters,
         textCapitalization: capitalization,
         obscureText: obscureText,
+        style: TextStyle(fontSize: 14),
+
         decoration: InputDecoration(
           labelText: labelText,
+          labelStyle: TextStyle(fontSize: 14),
           border: OutlineInputBorder(),
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 12,
