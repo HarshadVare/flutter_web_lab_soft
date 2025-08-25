@@ -4,13 +4,15 @@ import 'package:primecare_lab_soft/features/test_entry/domain/repositories/test_
 import 'package:primecare_lab_soft/features/test_entry/presentation/parser/sdui_mapper.dart';
 
 class TestEntryRepositoryImpl implements TestEntryRepository {
-  final TestEntryLocalDataSource localDataSource;
+  final TestEntryDataSourceImpl testEntryDataSourceImpl;
 
-  TestEntryRepositoryImpl(this.localDataSource);
+  TestEntryRepositoryImpl(this.testEntryDataSourceImpl);
 
   @override
   Future<SduiComponent> getTestEntryUI() async {
-    final json = await localDataSource.loadJson();
+    final json = await testEntryDataSourceImpl.loadUiJson();
+
+    ///for json to entity mapper
     return SduiMapper.fromJson(json);
   }
 }
